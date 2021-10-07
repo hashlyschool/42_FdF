@@ -39,7 +39,7 @@ Ghosts'n Goblins - это платформенная игра, в которой
 * Наследие
 	* За Ghosts’n Goblins последовала серия сиквелов и спин-оффов, которые в конечном итоге стали 8-й самой продаваемой серией игр Capcom, проданной более 4,4 миллиона единиц. Его сиквелы включают Ghouls’n Ghosts, Super Ghouls’n Ghosts и Ultimate Ghosts’n Goblins, а также продюсируют серию Gargoyle’s Quest и Maximo. Несмотря на то, что франшиза зародилась как аркадная, она была представлена на различных ПК и игровых консолях с последними записями серии Ghosts ’n Goblins: Gold Knights, выпущенными для iOS. Кроме того, франшиза часто появляется в эпизодических эпизодах - в частности, об Артуре - в других играх Capcom, последней из которых является Ultimate Marvel vs. Capcom 3.
 
-![Figure 1.1: Game's cover](https://github.com/hashlyschool/42_FdF/blob/main/ImageForReadme/1.png)
+![Figure 1.1: Game's cover](https://github.com/hashlyschool/42_FdF/blob/master/ImageForReadme/1.png)
 
 # Глава 2 #
 
@@ -49,7 +49,7 @@ Ghosts'n Goblins - это платформенная игра, в которой
 
 Сегодня ваша очередь моделировать в 3D великолепные пейзажи, вымышленные или нет ...
 
-![2](https://github.com/hashlyschool/42_FdF/blob/main/ImageForReadme/2.png)
+![2](https://github.com/hashlyschool/42_FdF/blob/master/ImageForReadme/2.png)
 
 # Глава 3 #
 
@@ -118,7 +118,7 @@ Ghosts'n Goblins - это платформенная игра, в которой
 	$>./fdf 42.fdf
 	$>
 
-![3](https://github.com/hashlyschool/42_FdF/blob/main/ImageForReadme/3.png)
+![3](https://github.com/hashlyschool/42_FdF/blob/master/ImageForReadme/3.png)
 
 Не забудьте оптимально использовать ваш libft! Использование get_next_line, ft_split и ft_getnbr позволит вам быстро и просто читать данные из файла.
 
