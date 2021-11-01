@@ -2,7 +2,7 @@
 # define FDF_H
 
 # include <fcntl.h>
-# include "libft/includes/libft.h"
+# include "../libft/includes/libft.h"
 //# include "minilibx_macos/mlx.h"
 
 typedef struct fdf
