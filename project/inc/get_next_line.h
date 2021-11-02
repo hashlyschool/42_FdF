@@ -1,37 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf.h                                              :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hashly <hashly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/01 20:45:44 by hashly            #+#    #+#             */
-/*   Updated: 2021/11/02 20:05:03 by hashly           ###   ########.fr       */
+/*   Created: 2021/11/01 20:44:11 by hashly            #+#    #+#             */
+/*   Updated: 2021/11/01 20:44:12 by hashly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FDF_H
-# define FDF_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-# include <fcntl.h>
-# include "../libft/includes/libft.h"
-//# include "minilibx_macos/mlx.h"
 # include <stdlib.h>
-# include "./get_next_line.h"
+# include <unistd.h>
 
+int		ft_sheck_rtn(char *surplus);
+size_t	ft_strlen(const char *str);
+char	*ft_strjoin_free(char *surplus, char *buf);
+int		get_next_line(int fd, char **line);
 
-typedef struct fdf
-{
-	int 	col;
-	int		row;
-	int		**z_matrix;
-
-	void	*mlx_ptr;
-	void	*win_ptr;
-}	fdf;
-
-void	read_map(fdf *data, char *file_name);
-void	ft_error(char *str_error);
-void	ft_error_malloc_str(char *str_error, fdf *data, int i);
-
-#endif //FDF_H
+#endif
