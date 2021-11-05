@@ -6,7 +6,7 @@
 /*   By: hashly <hashly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 20:45:55 by hashly            #+#    #+#             */
-/*   Updated: 2021/11/05 16:42:17 by hashly           ###   ########.fr       */
+/*   Updated: 2021/11/05 19:54:08 by hashly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,11 +139,6 @@ void	read_map(fdf *data, char *file_name)
 
 	check_map(data, file_name);
 	get_weight_height(data, file_name);
-	// ft_putstr_fd("\n", 1);
-	// ft_putnbr_fd(data->col, 1);
-	// ft_putstr_fd("\n", 1);
-	// ft_putnbr_fd(data->row, 1);
-	// ft_putstr_fd("\n", 1);
 	data->map_z = (int **)malloc(sizeof(int *) * data->row);
 	if (!data->map_z)
 		ft_error("Ошибка выделения памяти\n");
@@ -155,5 +150,10 @@ void	read_map(fdf *data, char *file_name)
 			ft_error_malloc_str("Ошибка выделения памяти\n", data, i); //очистить память в i-1 строках
 	}
 	fill_map(data, file_name);
+	// ft_putstr_fd("\n", 1);
+	// ft_putnbr_fd(data->max, 1);
+	// ft_putstr_fd("\n", 1);
+	// ft_putnbr_fd(data->min, 1);
+	// ft_putstr_fd("\n", 1);
 	return ;
 }

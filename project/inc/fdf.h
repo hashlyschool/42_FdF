@@ -6,7 +6,7 @@
 /*   By: hashly <hashly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 20:45:44 by hashly            #+#    #+#             */
-/*   Updated: 2021/11/05 18:08:00 by hashly           ###   ########.fr       */
+/*   Updated: 2021/11/05 23:00:20 by hashly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 # define DEG_TO_RAD(deg) (deg * PI / 180)
 # define COS_DEG(deg) (cos(DEG_TO_RAD(deg)))
 # define SIN_DEG(deg) (sin(DEG_TO_RAD(deg)))
-# define WIDTH 1600
-# define HEIGHT 800
+# define WIDTH_DISP 1280
+# define HEIGHT_DISP 700
 
 typedef struct fdf
 {
@@ -39,7 +39,7 @@ typedef struct fdf
 	int		color_min;
 	int		color;
 	int		**map_z;
-	int		zoom;
+	float	zoom;
 	int		shift_x;
 	int		shift_y;
 	int		type_draw;
@@ -60,6 +60,7 @@ void	ft_error_malloc_str(char *str_error, fdf *data, int i);
 //helper_func.c
 float	ft_max(float a, float b);
 float	ft_abs(float a);
+float	ft_min(float a, float b);
 //draw.c
 void	draw_map(fdf *data);
 //color.c

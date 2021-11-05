@@ -6,7 +6,7 @@
 /*   By: hashly <hashly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 13:47:25 by hashly            #+#    #+#             */
-/*   Updated: 2021/11/05 19:35:31 by hashly           ###   ########.fr       */
+/*   Updated: 2021/11/05 22:34:31 by hashly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ int get_color(fdf *data, int current)
 	int		blue;
 	double	percent;
 
-	if (current == data->max)
+	if (current >= data->max * 0.98)
 		return (data->color_max);
-	else if (current == data->min)
+	else if (current <= data->min * 0.98)
 		return (data->color_min);
 	percent = get_percent(data->max, data->min, current);
 	red = get_light((data->color_max >> 16) & 0xFF, (data->color_min >> 16) & 0xFF, percent);

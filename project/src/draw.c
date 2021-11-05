@@ -6,7 +6,7 @@
 /*   By: hashly <hashly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 10:58:37 by hashly            #+#    #+#             */
-/*   Updated: 2021/11/05 19:22:42 by hashly           ###   ########.fr       */
+/*   Updated: 2021/11/05 22:58:53 by hashly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,7 +117,7 @@ void	draw_straight_line(float x1, float y1, float x2, float y2, fdf *data)
 	z_step /= max;
 	while((int)(x1 - x2) || (int)(y1 - y2))
 	{
-		if (x1 > 0 && x1 <= WIDTH && y1 > 0 && y1 <= HEIGHT)
+		if (x1 >= 0 && x1 <= WIDTH_DISP && y1 >= 0 && y1 <= HEIGHT_DISP)
 		{
 			data->color = get_color(data, z1_true);
 			mlx_pixel_put(data->mlx_ptr, data->win_ptr, x1, y1, data->color);
