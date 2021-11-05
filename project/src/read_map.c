@@ -6,7 +6,7 @@
 /*   By: hashly <hashly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 20:45:55 by hashly            #+#    #+#             */
-/*   Updated: 2021/11/05 14:22:52 by hashly           ###   ########.fr       */
+/*   Updated: 2021/11/05 16:42:17 by hashly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	split_str_and_write_to_array(fdf *data, char *str, int num_str)
 	while(arr_nbr[i])
 	{
 		nbr = ft_atoi(arr_nbr[i]);
+		free(arr_nbr[i]);
 		data->map_z[num_str][i] = nbr;
 		if (nbr > data->max)
 			data->max = nbr;
@@ -94,6 +95,7 @@ void	split_str_and_write_to_array(fdf *data, char *str, int num_str)
 			data->min = nbr;
 		i++;
 	}
+	free(arr_nbr);
 }
 
 void	fill_map(fdf *data, char *file_name)
@@ -137,10 +139,15 @@ void	read_map(fdf *data, char *file_name)
 
 	check_map(data, file_name);
 	get_weight_height(data, file_name);
+	// ft_putstr_fd("\n", 1);
+	// ft_putnbr_fd(data->col, 1);
+	// ft_putstr_fd("\n", 1);
+	// ft_putnbr_fd(data->row, 1);
+	// ft_putstr_fd("\n", 1);
 	data->map_z = (int **)malloc(sizeof(int *) * data->row);
 	if (!data->map_z)
 		ft_error("Ошибка выделения памяти\n");
-	i = data->col;
+	i = data->row;
 	while (i--)
 	{
 		data->map_z[i] = (int *)malloc(sizeof(int) * data->col);

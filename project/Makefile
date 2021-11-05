@@ -1,8 +1,8 @@
 NAME		= fdf
 NAME_BONUS	=
 CC			= clang
-FLAGS		= -O3 -Wall -Wextra -Werror -D BUFFER_SIZE=5
-LFLAGS		= -O3 -Wall -Wextra -Werror -D BUFFER_SIZE=5 -lXext -lX11 -lm -lbsd
+FLAGS		= -O3 -Wall -Wextra -Werror
+LFLAGS		= -O3 -Wall -Wextra -Werror -lXext -lX11 -lm -lbsd
 RM			= rm -rf
 AR			= ar rc
 INC			= -I ./inc

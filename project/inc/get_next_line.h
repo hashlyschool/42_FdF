@@ -6,12 +6,14 @@
 /*   By: hashly <hashly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 20:44:11 by hashly            #+#    #+#             */
-/*   Updated: 2021/11/01 20:44:12 by hashly           ###   ########.fr       */
+/*   Updated: 2021/11/05 18:11:14 by hashly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
+
+# define BUFFER_SIZE 100
 
 # include <stdlib.h>
 # include <unistd.h>

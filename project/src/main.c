@@ -6,7 +6,7 @@
 /*   By: hashly <hashly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 20:45:52 by hashly            #+#    #+#             */
-/*   Updated: 2021/11/05 15:43:30 by hashly           ###   ########.fr       */
+/*   Updated: 2021/11/05 19:32:58 by hashly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 int	deal_key(int key, fdf *data)
 {
-	if (data->type_draw == 1)
-	{
-		ft_putnbr_fd(key, 1);
-		ft_putstr_fd("\n", 1);
-	}
+	// if (data->type_draw == 1)
+	// {
+	// 	ft_putnbr_fd(key, 1);
+	// 	ft_putstr_fd("\n", 1);
+	// }
 	//65307	Esc
 	//65362	up
 	//65364	down
@@ -32,6 +32,8 @@ int	deal_key(int key, fdf *data)
 	//46	.
 	//45	-
 	//61	=
+
+	//Убрать бы перерисовку
 	int	step;
 
 	step = 20;
@@ -49,7 +51,7 @@ int	deal_key(int key, fdf *data)
 	{
 		if (data->zoom > 10)
 			data->zoom -= 5;
-		else if (data->zoom > 0)
+		else if (data->zoom > 1)
 			data->zoom -= 1;
 	}
 	else if (key == 61)
@@ -97,18 +99,16 @@ int	main(int argc, char **argv)
 	data.angle_z = 0;
 	data.shift_x = 200;
 	data.shift_y = 200;
-	data.color_max = 0xe80c0c;
-	data.color_min = 0xffffff;
+	data.color_max = 0xe80c0c;//0xE2062C;
+	data.color_min = 0xffffff;//0x0000CD;
 	data.type_view = 1;
 	data.mlx_ptr = mlx_init();
 	data.win_ptr = mlx_new_window(data.mlx_ptr, WIDTH, HEIGHT, "FDF");
 
-	//draw_by_two_points(10, 10, 300, 300, &data);
 	draw_map(&data);
 
 	mlx_key_hook(data.win_ptr, deal_key, &data);
 	mlx_loop(data.mlx_ptr);
-
 
 	return (0);
 }
