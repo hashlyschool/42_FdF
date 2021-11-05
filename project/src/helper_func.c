@@ -1,33 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   helper_func.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hashly <hashly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/02 21:44:27 by hashly            #+#    #+#             */
-/*   Updated: 2021/11/05 15:11:14 by hashly           ###   ########.fr       */
+/*   Created: 2021/11/04 11:29:07 by hashly            #+#    #+#             */
+/*   Updated: 2021/11/04 11:31:41 by hashly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-void	ft_error(char *str_error)
+float	ft_max(float a, float b)
 {
-	ft_putstr_fd(str_error, 1);
-	exit(0);
+	if (a > b)
+		return a;
+	else
+		return b;
 }
 
-void	ft_error_malloc_str(char *str_error, fdf *data, int i)
+float	ft_abs(float a)
 {
-	int	j;
-
-	j = 0;
-	ft_putstr_fd(str_error, 1);
-	while (i < j)
-	{
-		free(data->map_z[i++]);
-	}
-	free(data->map_z);
-	exit(0);
+	if (a < 0)
+		return -a;
+	else
+		return a;
 }

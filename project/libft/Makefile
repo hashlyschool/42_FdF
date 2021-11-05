@@ -4,6 +4,7 @@ FLAGS		= -O3 -Wall -Wextra -Werror
 RM			= rm -rf
 AR			= ar rc
 INC			= -I ./includes/
+INC_FILE	= ./includes/*
 
 SRCS_PATH	= ./sources/
 OBJS_PATH	= ./objs/
@@ -34,7 +35,7 @@ $(NAME): $(OBJS_PATH) $(OBJS)
 	$(AR) $(NAME) $(OBJS)
 	ranlib $(NAME)
 
-$(OBJS_PATH)%.o: $(SRCS_PATH)%.c
+$(OBJS_PATH)%.o: $(SRCS_PATH)%.c $(INC_FILE)
 	$(CC) -c $(FLAGS) $(INC) $< -o $@
 
 $(OBJS_PATH):
