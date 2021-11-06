@@ -6,161 +6,145 @@
 /*   By: hashly <hashly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 10:58:37 by hashly            #+#    #+#             */
-/*   Updated: 2021/11/05 22:58:53 by hashly           ###   ########.fr       */
+/*   Updated: 2021/11/06 22:20:14 by hashly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
-
-void	isometric(float *x, float *y, float z)
-{
-	float	x_true;
-	float	y_true;
-	double	angle;
-
-	x_true = *x;
-	y_true = *y;
-	angle = 0.523599;
-	*x = (x_true - y_true) * cos(angle);
-	*y = (x_true + y_true) * sin(angle) - z;
-}
-
-void	turn(float *x, float *y, float *z, fdf *data)
-{
-	float	true_x;
-	float	true_y;
-	float	true_z;
-
-	true_y = *y;
-	true_z = *z;
-	// turn_x
-	*y = true_y * COS_DEG(data->angle_x) + true_z * SIN_DEG(data->angle_x);
-	*z = -true_y * SIN_DEG(data->angle_x) + true_z * COS_DEG(data->angle_x);
-	// turn_y
-	true_x = *x;
-	true_z = *z;
-	*x = true_x * COS_DEG(data->angle_y) + true_z * SIN_DEG(data->angle_y);
-	*z = -true_x * SIN_DEG(data->angle_y) + true_z * COS_DEG(data->angle_y);
-	// turn_z
-	true_x = *x;
-	true_y = *y;
-	*x = true_x * COS_DEG(data->angle_z) - true_y * SIN_DEG(data->angle_z);
-	*y = true_x * SIN_DEG(data->angle_z) + true_y * COS_DEG(data->angle_z);
-}
-
 /*
-Функция соединяет две точки по прямой
+a[i]:
+	i
+	0:	x1
+	1:	y1
+	2:	x2
+	3:	y2
 */
-void	draw_straight_line(float x1, float y1, float x2, float y2, fdf *data)
+void	zoom_turn_shift(t_fdf *data, float *a, float z1, float z2)
 {
-	float	x_step;
-	float	y_step;
-	float	z_step;
-	int		max;
-	float	z1;
-	float	z2;
-	float	z1_true;
-
-	z1 = data->map_z[(int)y1][(int)x1];
-	z2 = data->map_z[(int)y2][(int)x2];
-	z1_true = z1;
-	z_step = z2 - z1;
-	x1 *= data->zoom;
-	x2 *= data->zoom;
-	y1 *= data->zoom;
-	y2 *= data->zoom;
-	z1 *= data->zoom / 2;
-	z2 *= data->zoom / 2;
-
-	if (data->type_view == 1)
+	a[0] *= data->zoom;
+	a[2] *= data->zoom;
+	a[1] *= data->zoom;
+	a[3] *= data->zoom;
+	z1 *= data->zoom / ZOOM_FACTOR_Z;
+	z2 *= data->zoom / ZOOM_FACTOR_Z;
+	if (data->type_view == 7)
 	{
-		isometric(&x1, &y1, z1);
-		isometric(&x2, &y2, z2);
+		isometric(&(a[0]), &(a[1]), z1);
+		isometric(&(a[2]), &(a[3]), z2);
 	}
 	else
 	{
-		if (data->type_view == 8) //вид сверху
-		{
-			data->angle_x = 0;
-			data->angle_y = 0;
-			data->angle_z = 0;
-		}
-		else if (data->type_view == 5) //главный вид
-		{
-			data->angle_x = -90;
-			data->angle_y = 0;
-			data->angle_z = 0;
-		}
-		else if (data->type_view == 6) //вид справа
-		{
-			data->angle_x = -90;
-			data->angle_y = 90;
-			data->angle_z = 0;
-		}
-		turn(&x1, &y1, &z1, data);
-		turn(&x2, &y2, &z2, data);
+		turn(&a[0], &a[1], &z1, data);
+		turn(&a[2], &a[3], &z2, data);
 	}
+	a[0] += data->shift_x;
+	a[1] += data->shift_y;
+	a[2] += data->shift_x;
+	a[3] += data->shift_y;
+}
 
+void	draw_line(float *steps, float *a, t_fdf *d, float z1_true)
+{
+	int		max;
 
-
-	x1 += data->shift_x;
-	y1 += data->shift_y;
-	x2 += data->shift_x;
-	y2 += data->shift_y;
-
-	x_step = x2 - x1;
-	y_step = y2 - y1;
-
-	max = ft_max(ft_abs(x_step), ft_abs(y_step));
-	x_step /= max;
-	y_step /= max;
-	z_step /= max;
-	while((int)(x1 - x2) || (int)(y1 - y2))
+	steps[0] = a[2] - a[0];
+	steps[1] = a[3] - a[1];
+	max = ft_max(ft_abs(steps[0]), ft_abs(steps[1]));
+	steps[0] /= max;
+	steps[1] /= max;
+	steps[2] /= max;
+	while ((int)(a[0] - a[2]) || (int)(a[1] - a[3]))
 	{
-		if (x1 >= 0 && x1 <= WIDTH_DISP && y1 >= 0 && y1 <= HEIGHT_DISP)
+		if (a[0] >= 0 && a[0] <= WIDTH_DISP && a[1] >= 0 && a[1] <= HEIGHT_DISP)
 		{
-			data->color = get_color(data, z1_true);
-			mlx_pixel_put(data->mlx_ptr, data->win_ptr, x1, y1, data->color);
+			d->color = get_color(d, z1_true);
+			mlx_pixel_put(d->mlx_ptr, d->win_ptr, a[0], a[1], d->color);
 		}
-		x1 += x_step;
-		y1 += y_step;
-		z1_true += z_step;
+		a[0] += steps[0];
+		a[1] += steps[1];
+		z1_true += steps[2];
 	}
 }
 
 /*
-Функция в зависимости от параметра data->type_draw
-запускает функцию рисования по двум точкам.
-Либо соединяет две точки по прямой (type_draw == 1) или выступами (type_draw == 2)
+Функция соединяет две точки по прямой.
+arr[i]:
+	i
+	0:	x1
+	1:	y1
+	2:	x2
+	3:	y2
+
+steps[i]:
+i
+0:	x_step
+1:	y_step
+2:	z_step
 */
-void	draw_by_two_points(float x1, float y1, float x2, float y2, fdf *data)
+void	draw_by_two_points(float *a, t_fdf *data)
 {
-	if (data->type_draw == 1)
-		draw_straight_line(x1, y1, x2, y2, data);
-	/* нарисовать выступами
-	else if (data->type_draw == 2)
-		draw with protrusions()
-	*/
+	float	*steps;
+	float	z1_true;
+
+	steps = (float *)malloc(sizeof(float) * 3);
+	z1_true = data->map_z[(int)a[1]][(int)a[0]];
+	steps[2] = data->map_z[(int)a[3]][(int)a[2]] \
+							- data->map_z[(int)a[1]][(int)a[0]];
+	zoom_turn_shift(data, a, data->map_z[(int)a[1]][(int)a[0]], \
+					data->map_z[(int)a[3]][(int)a[2]]);
+	draw_line(steps, a, data, z1_true);
+	free(steps);
 }
 
-
-void	draw_map(fdf *data)
+/*
+type = 1 - horiz
+type = 2 - vertic
+*/
+void	fiil_arr(float *arr, int x, int y, int type)
 {
-	int	x;
-	int	y;
+	arr[0] = x;
+	arr[1] = y;
+	if (type == 1)
+	{
+		arr[2] = arr[0] + 1;
+		arr[3] = arr[1];
+	}
+	else if (type == 2)
+	{
+		arr[2] = arr[0];
+		arr[3] = arr[1] + 1;
+	}
+}
 
+/*
+arr:
+0	x1
+1	y1
+2	x2
+3	y2
+*/
+void	draw_map(t_fdf *data)
+{
+	int		x;
+	int		y;
+	float	*arr;
+
+	arr = (float *)malloc(sizeof(float) * 4);
 	y = 0;
-	while(y < data->row)
+	while (y < data->row)
 	{
 		x = 0;
-		while(x < data->col)
+		while (x < data->col)
 		{
+			fiil_arr(arr, x, y, 1);
 			if (x < data->col - 1)
-				draw_by_two_points(x, y, x + 1, y, data);
+				draw_by_two_points(arr, data);
+			fiil_arr(arr, x, y, 2);
 			if (y < data->row - 1)
-				draw_by_two_points(x, y, x, y + 1, data);
+				draw_by_two_points(arr, data);
 			x++;
 		}
 		y++;
 	}
+	free(arr);
 }

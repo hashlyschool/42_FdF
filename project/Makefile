@@ -15,7 +15,7 @@ OBJS_PATH	= ./objs/
 
 SRCS_NAME	=	main.c read_map.c error.c get_next_line.c \
 				get_next_line_utils.c helper_func.c draw.c \
-				color.c
+				color.c param_view.c draw_turn.c
 SRCS		= $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 OBJS		= $(addprefix $(OBJS_PATH), $(SRCS_NAME:.c=.o))
 

@@ -6,13 +6,13 @@
 /*   By: hashly <hashly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 13:47:25 by hashly            #+#    #+#             */
-/*   Updated: 2021/11/05 22:34:31 by hashly           ###   ########.fr       */
+/*   Updated: 2021/11/06 18:17:40 by hashly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../inc/fdf.h"
 
-double get_percent(int start, int end, int current)
+double	get_percent(int start, int end, float current)
 {
 	double	placement;
 	double	distance;
@@ -25,25 +25,38 @@ double get_percent(int start, int end, int current)
 		return (placement / distance);
 }
 
-int get_light(int start, int end, double percentage)
+/*
+int	get_light(int start, int end, double percentage)
+*/
+int	g_l(int start, int end, double percentage)
 {
 	return ((int)((1 - percentage) * start + percentage * end));
 }
 
-int get_color(fdf *data, int current)
+int	get_color(t_fdf *d, float current)
 {
 	int		red;
 	int		green;
 	int		blue;
-	double	percent;
+	double	per;
 
-	if (current >= data->max * 0.98)
-		return (data->color_max);
-	else if (current <= data->min * 0.98)
-		return (data->color_min);
-	percent = get_percent(data->max, data->min, current);
-	red = get_light((data->color_max >> 16) & 0xFF, (data->color_min >> 16) & 0xFF, percent);
-	green = get_light((data->color_max >> 8) & 0xFF, (data->color_min >> 8) & 0xFF, percent);
-	blue = get_light(data->color_max & 0xFF, data->color_min & 0xFF, percent);
+	if (current >= 0)
+	{
+		d->color_max = COLOR_MAX;
+		d->color_min = COLOR_ZERO;
+	}
+	else
+	{
+		d->color_max = COLOR_ZERO;
+		d->color_min = COLOR_MIN;
+	}
+	if (current >= d->max * 0.99)
+		return (d->color_max);
+	else if (current <= d->min * 0.99)
+		return (d->color_min);
+	per = get_percent(d->max, d->min, current);
+	red = g_l((d->color_max >> 16) & 0xFF, (d->color_min >> 16) & 0xFF, per);
+	green = g_l((d->color_max >> 8) & 0xFF, (d->color_min >> 8) & 0xFF, per);
+	blue = g_l(d->color_max & 0xFF, d->color_min & 0xFF, per);
 	return ((red << 16) | (green << 8) | blue);
 }
