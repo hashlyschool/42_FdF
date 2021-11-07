@@ -6,7 +6,7 @@
 /*   By: hashly <hashly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 10:58:37 by hashly            #+#    #+#             */
-/*   Updated: 2021/11/06 22:20:14 by hashly           ###   ########.fr       */
+/*   Updated: 2021/11/07 20:11:16 by hashly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	draw_line(float *steps, float *a, t_fdf *d, float z1_true)
 		if (a[0] >= 0 && a[0] <= WIDTH_DISP && a[1] >= 0 && a[1] <= HEIGHT_DISP)
 		{
 			d->color = get_color(d, z1_true);
-			mlx_pixel_put(d->mlx_ptr, d->win_ptr, a[0], a[1], d->color);
+			my_mlx_pixel_put(d, a[0], a[1], d->color);
 		}
 		a[0] += steps[0];
 		a[1] += steps[1];
@@ -123,7 +123,7 @@ arr:
 2	x2
 3	y2
 */
-void	draw_map(t_fdf *data)
+int	draw_map(t_fdf *data)
 {
 	int		x;
 	int		y;
@@ -146,5 +146,7 @@ void	draw_map(t_fdf *data)
 		}
 		y++;
 	}
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img, 0, 0);
 	free(arr);
+	return (0);
 }

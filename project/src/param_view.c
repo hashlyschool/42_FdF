@@ -6,7 +6,7 @@
 /*   By: hashly <hashly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/06 12:50:25 by hashly            #+#    #+#             */
-/*   Updated: 2021/11/06 22:30:58 by hashly           ###   ########.fr       */
+/*   Updated: 2021/11/07 20:19:34 by hashly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,4 +107,7 @@ void	set_default_parametrs(t_fdf *data)
 	find_param_view(data, 7);
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr, width, height, "t_fdf");
+	data->img = mlx_new_image(data->mlx_ptr, width, height);
+	data->addr = mlx_get_data_addr(data->img, &data->bits_per_pixel, \
+								&data->line_length, &data->endian);
 }

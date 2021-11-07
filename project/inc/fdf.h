@@ -6,7 +6,7 @@
 /*   By: hashly <hashly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 20:45:44 by hashly            #+#    #+#             */
-/*   Updated: 2021/11/06 19:36:59 by hashly           ###   ########.fr       */
+/*   Updated: 2021/11/07 19:39:14 by hashly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,7 @@
 # include <stdlib.h>
 # include "../libft/includes/libft.h"
 # include "./get_next_line.h"
-# include "../../../minilibx-linux/mlx.h"
-# include "../../../minilibx-linux/mlx_int.h"
+# include "../minilibx-linux/mlx.h"
 
 # define ISO_ANGLE			0.523599
 # define PI					3.14159265359
@@ -32,9 +31,9 @@
 # define STEP_ANGLE			5
 # define PERC_FOR_ZOOM		15.
 
-# define COLOR_ZERO			0xffffff
-# define COLOR_MAX			0xe80c0c
-# define COLOR_MIN			0x0000CD
+# define COLOR_ZERO			0x00ffffff
+# define COLOR_MAX			0x00e80c0c
+# define COLOR_MIN			0x000000CD
 
 typedef struct t_fdf
 {
@@ -56,6 +55,11 @@ typedef struct t_fdf
 
 	void	*mlx_ptr;
 	void	*win_ptr;
+	void	*img;
+	char	*addr;
+	int		bits_per_pixel;
+	int		line_length;
+	int		endian;
 }	t_fdf;
 
 //read_map.c
@@ -70,7 +74,7 @@ float	ft_min(float a, float b);
 double	sin_deg(double x);
 double	cos_deg(double x);
 //draw.c
-void	draw_map(t_fdf *data);
+int		draw_map(t_fdf *data);
 //draw_turn.c
 void	set_angle(t_fdf *data);
 void	isometric(float *x, float *y, float z);
@@ -81,5 +85,10 @@ int		get_color(t_fdf *data, float current);
 void	set_default_parametrs(t_fdf *data);
 void	find_param_view(t_fdf *data, int type_view);
 void	change_angle_view(t_fdf *data, int key);
+//control.c
+int		deal_key(int key, t_fdf *data);
+int		ft_close(t_fdf *data);
+//draw2.c
+void	my_mlx_pixel_put(t_fdf *data, int x, int y, int color);
 
 #endif

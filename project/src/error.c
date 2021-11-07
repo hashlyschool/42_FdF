@@ -6,7 +6,7 @@
 /*   By: hashly <hashly@student.21-school.ru>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/02 21:44:27 by hashly            #+#    #+#             */
-/*   Updated: 2021/11/06 17:04:16 by hashly           ###   ########.fr       */
+/*   Updated: 2021/11/07 19:47:01 by hashly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	ft_error_malloc_str(char *str_error, t_fdf *data, int i)
 	}
 	free(data->map_z);
 	mlx_clear_window(data->mlx_ptr, data->win_ptr);
+	mlx_destroy_image(data->mlx_ptr, data->img);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
