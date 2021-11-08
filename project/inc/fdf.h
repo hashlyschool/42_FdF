@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fdf.h                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hashly <hashly@student.21-school.ru>       +#+  +:+       +#+        */
+/*   By: hashly <hashly@students.21-school.ru>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 20:45:44 by hashly            #+#    #+#             */
-/*   Updated: 2021/11/07 19:39:14 by hashly           ###   ########.fr       */
+/*   Updated: 2021/11/08 09:39:43 by hashly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,19 @@
 # define ISO_ANGLE			0.523599
 # define PI					3.14159265359
 
-# define WIDTH_DISP			1280
-# define HEIGHT_DISP		800
+# define WIDTH_DISP			1920
+# define HEIGHT_DISP		1080
 
 # define ZOOM_FACTOR_Z		10.
 # define STEP_SHIFT			20
 # define STEP_ANGLE			5
 # define PERC_FOR_ZOOM		15.
 
-# define COLOR_ZERO			0x00ffffff
-# define COLOR_MAX			0x00e80c0c
-# define COLOR_MIN			0x000000CD
+# define COLOR_ZERO			0xffffffff
+# define COLOR_MAX			0xffe80c0c
+# define COLOR_MIN			0xff0000CD
 
-typedef struct t_fdf
+typedef struct s_fdf
 {
 	int		col;
 	int		row;
