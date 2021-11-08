@@ -52,9 +52,4 @@ fclean:		clean clean_minilibx
 
 re:			fclean all
 
-# bonus:	$(LIBFT) $(NAME) $(NAME_BONUS)
-
-# $(NAME_BONUS): $(OBJS_PATH) $(BONUS_OBJS)
-# 	$(CC) $(FLAGS) $(BONUS_OBJS) $(LIBFT) -o $(NAME_BONUS)
-
-.PHONY: all clean fclean re #bonus
+.PHONY: all clean fclean re $(LIBFT)
