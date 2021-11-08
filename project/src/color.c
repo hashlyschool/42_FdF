@@ -6,7 +6,7 @@
 /*   By: hashly <hashly@students.21-school.ru>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/05 13:47:25 by hashly            #+#    #+#             */
-/*   Updated: 2021/11/08 10:32:44 by hashly           ###   ########.fr       */
+/*   Updated: 2021/11/08 10:59:33 by hashly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ int	get_color(t_fdf *d, float current)
 	int		blue;
 	double	per;
 
+	if (current > -0.01 && current < 0.01)
+		return (COLOR_ZERO);
 	if (current >= 0)
 	{
 		d->color_max = COLOR_MAX;
@@ -50,10 +52,6 @@ int	get_color(t_fdf *d, float current)
 		d->color_max = COLOR_ZERO;
 		d->color_min = COLOR_MIN;
 	}
-	if (current >= d->max * 0.99)
-		return (d->color_max);
-	else if (current <= d->min * 0.99)
-		return (d->color_min);
 	per = get_percent(d->max, d->min, current);
 	red = g_l((d->color_max >> 16) & 0xFF, (d->color_min >> 16) & 0xFF, per);
 	green = g_l((d->color_max >> 8) & 0xFF, (d->color_min >> 8) & 0xFF, per);

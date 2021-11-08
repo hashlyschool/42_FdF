@@ -6,7 +6,7 @@
 /*   By: hashly <hashly@students.21-school.ru>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/01 20:45:44 by hashly            #+#    #+#             */
-/*   Updated: 2021/11/08 10:32:25 by hashly           ###   ########.fr       */
+/*   Updated: 2021/11/08 10:55:00 by hashly           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@
 # define ISO_ANGLE			0.523599
 # define PI					3.14159265359
 
-# define WIDTH_DISP			1920
-# define HEIGHT_DISP		1080
+# define WIDTH_DISP			1800
+# define HEIGHT_DISP		1000
 
 # define ZOOM_FACTOR_Z		10.
 # define STEP_SHIFT			20
